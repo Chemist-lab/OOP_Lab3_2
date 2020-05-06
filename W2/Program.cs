@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace W2
 {
@@ -15,14 +16,15 @@ namespace W2
             StreamReader reader = new StreamReader(fileRead);
             StreamWriter writer = new StreamWriter(fileWrite, false, System.Text.Encoding.Default);
             readNums = reader.ReadToEnd();
+            int[] nums = readNums.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
-            for(int i = 0; i < readNums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
-                CheckNum = readNums[i];
+                CheckNum = nums[i];
                 if (CheckNum % 2 == 0)
                 {
-                    Console.WriteLine(readNums[i]);
-                    writer.Write(readNums[i]);
+                    Console.WriteLine(nums[i]);
+                    writer.Write(nums[i]+"\n");
                 }
             }
             writer.Close();
